@@ -1,7 +1,7 @@
 # Calculator using Javascript and Stack data structure Concept
 It is a calculator built on javascript, jquery, html and css using Stack Data Structure for building the logic behind the calclulation  
 
-**Logic**
+**--------Logic--------**
 
 For coding the main calculation section. I have used:
 1. First, i have converted the equation i.e. the infix expression to a postfix expression.
