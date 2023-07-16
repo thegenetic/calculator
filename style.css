@@ -1,0 +1,128 @@
+:root {
+    --dark-body: #22252D;
+    --dark-text: #fff;
+    --dark-bg: #292D36;
+    --dark-screen: #000;
+
+    --light-body: #fff;
+    --light-text: #000;
+    --light-bg: #F9F9F9;
+    --light-screen: #faeefcb6;
+
+    --green: #26C1A7;
+    --red: #DD6262;
+}
+
+.dark {
+    --bg-body: var(--dark-body);
+    --bg-main: var(--dark-body);
+    --bg-secondary: var(--dark-bg);
+    --bg-screen: var(--dark-screen);
+    --text: var(--dark-text);
+}
+
+.light {
+    --bg-body: var(--light-body);
+    --bg-main: var(--light-body);
+    --bg-secondary: var(--light-bg);
+    --bg-screen: var(--light-screen);
+    --text: var(--light-text);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* height: 100vh; */
+    display: grid;
+    place-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--bg-body);
+}
+
+.center-div {
+    display: grid;
+    place-items: center;
+}
+
+.container {
+    background-color: var(--bg-main);
+    padding: 12px;
+    border-radius: 20px;
+}
+
+.mode {
+    display: flex;
+    color: var(--text);
+    background-color: var(--bg-secondary);
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+.mode i {
+    padding: 16px;
+}
+
+.screen {
+    text-align: right;
+    color: var(--text);
+    padding: 8px 8px;
+    margin: 12px 0;
+    background: var(--bg-screen);
+    border-radius: 20px;
+}
+
+.screen .equation {
+    font-size: 20px;
+    padding: 12px;
+    height: 44px;
+}
+
+.screen .result {
+    padding: 12px;
+    font-size: 32px;
+}
+
+.pad {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 12px;
+    border-radius: 16px;
+    background-color: var(--bg-secondary);
+    color: var(--text);
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.key {
+    text-align: center;
+    padding: 24px 20px;
+    cursor: pointer;
+}
+
+.green {
+    color: var(--green);
+}
+
+.red {
+    color: var(--red);
+}
+
+.copyright {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: var(--bg-screen);
+    color: var(--text);
+    width: 100%;
+    text-align: center;
+    padding: 8px 0;
+}
+
+.copyright a {
+    text-decoration: none;
+    color: #038ED2;
+}
