@@ -153,5 +153,9 @@ $('.key').on("click", function (e) {
         eq = "0";
         $('.equation').html(equation);
     }
+    else{
+        final_result = 0;
+        $('.result').html(final_result);
+    }
 
 });
