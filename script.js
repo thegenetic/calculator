@@ -10,49 +10,72 @@ function priority(c) {
         return -1;
 }
 
-function infixToPostfix(s) {
-    // converting the equation to a postfix expression for ease in calculation
-    let st = [];
-    let result = "";
-    for (let i = 0; i < s.length; i++) {
-        let c = s[i];
-        if (c>='0' && c<='9') {
-            result+=c;
+
+
+function expression(eq) {
+    i=0;
+    st=[];
+    flag = true;
+    a="";
+    while (i<eq.length) {
+        if (OPERATORS.includes(eq[i])) {
+            flag = false;
         }
+
+        if (flag) {
+            a+=eq[i];
+        }
+
         else{
-            while (st.length!=0 && priority(s[i]) <= priority(st[st.length - 1])) {
-                result += st[st.length - 1];
-                st.pop();
-            }
-            st.push(c);
+            st.push(a);
+            a="";
+            flag=true;
+            st.push(eq[i]);
         }
+        if (flag && i == eq.length - 1) {
+            st.push(a);
+        }
+        i++;
     }
-
-    while(st.length!=0){
-        result += st[st.length-1];
-        st.pop();
-    }
-
-    return result;
+    return st;
 }
 
-function calculate (exp) {
-    // performing the final calculation
-    var stack = [];
-    var temp = "";
-    for (let i = 0; i < exp.length; i++) {
-        if (OPERATORS.includes(exp[i])) {
-            op2 = stack.pop();
-            op1 = stack.pop();
-            temp = performOperation(op1, op2, exp[i])
-            stack.push(temp);
+
+function calculate(exp) {
+        var a = '';
+    // console.log(exp);
+    while (exp.length > 1) {
+
+
+        if (exp.includes('*') || exp.includes('/')) {
+            a = exp.includes('*') ? exp.indexOf('*') : exp.indexOf('/');
         }
         else{
-            stack.push(exp[i]);
+            if (exp.includes('+') || exp.includes('-')) {
+                a = exp.includes('+') ? exp.indexOf('+') : exp.indexOf('-');
+            }
+            else{
+                if (exp.includes('^') || exp.includes('%')) {
+                    a = exp.includes('^') ? exp.indexOf('^') : exp.indexOf('%');
+                }
+            }
+
+
         }
 
+        op1 = exp[a-1]==""? 0:Number(exp[a-1])
+        op2 = Number(exp[a+1])
+        op = exp[a];
+        var c = performOperation(op1,op2,op)
+        if (exp.length == 3) {
+            exp = [c];
+        }
+        else{
+            exp = [...exp.slice(0, a-1), c, ...exp.slice(a + 2)];
+        }
     }
-    return stack.pop()
+    return exp.pop()
+
 }
 
 function performOperation(a, b, op) {
@@ -61,21 +84,27 @@ function performOperation(a, b, op) {
     b = Number(b);
     switch (op) {
         case '+':
+            // console.log(a+b);
             return a+b
             break;
         case '-':
+            // console.log(a-b);
             return a-b
             break;
         case '*':
+            // console.log(a*b);
             return a*b
             break;
         case '/':
+            // console.log(a/b);
             return a/b
             break;
         case '%':
+            // console.log(a%b);
             return a%b
             break;
         case '^':
+            // console.log(a**b);
             return a**b
             break;
 
@@ -143,10 +172,9 @@ $('.key').on("click", function (e) {
         if (OPERATORS.includes(equation.charAt(equation.length - 1))) {
             equation = equation.slice(0,-1);
         }
+        var t = expression(equation);
 
-        var a = infixToPostfix(equation);
-
-        var final_result = calculate(a);
+        var final_result = calculate(t);
         $('.result').html(final_result);
 
         // reset the equation after calculation of one expression
